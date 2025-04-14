@@ -254,9 +254,23 @@
 </style>
 </head>
 <body>
-<audio autoplay="" loop="" preload="auto" style="display:none;">
-<source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Jazz_Sampler/Kevin_MacLeod_-_Lounge_Jazz.mp3" type="audio/mpeg"/>
+<audio autoplay="" id="bg-music" loop="" muted="" preload="auto" style="display: none;">
+<source src="https://docs.google.com/uc?export=open&amp;id=1SAriFBbif2OlkqUas5ppzs0TgCZA9CKC" type="audio/mp3"/>
+  您的瀏覽器不支援音訊播放。
 </audio>
+<script>
+  window.addEventListener('click', () => {
+    const audio = document.getElementById('bg-music');
+    if (audio.paused) {
+      audio.muted = false;
+      audio.play().catch((e) => {
+        console.warn("音樂播放失敗：", e);
+      });
+    }
+  });
+</script>
+
+
 <div class="container">
 <img class="sakura" src="https://cdn-icons-png.flaticon.com/512/7820/7820290.png" style="opacity: 0.2;"/><h1 style="background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Flag_of_Taiwan.svg/2560px-Flag_of_Taiwan.svg.png') no-repeat center center;background-size: cover;color: #ff2c91;padding: 20px;border-radius: 12px;opacity: 1;">芊絨 &amp; 詩芹：來自未來的我們 ✉️</h1>
 <div class="audio-box">
