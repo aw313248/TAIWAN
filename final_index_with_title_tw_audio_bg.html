@@ -45,8 +45,13 @@
       border-radius: 16px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
-    .locked {
+    .locked-content {
       display: none;
+    }
+    .unlock-hint {
+      font-size: 0.8em;
+      color: #c55;
+      margin-top: 8px;
     }
   </style>
 </head>
@@ -75,10 +80,15 @@
     <audio controls><source src="normalized_april_shiqin.mp3" type="audio/mpeg"></audio>
   </div>
 
-  <div id="august-card" class="card locked">
-    <img class="bottom-img" src="eight_months_tea.png" alt="八月插圖">
+  <div id="august-wrapper" class="card">
     <h2>🫖 八月仲夏：生活穩定了嗎？</h2>
-    <p>
+    <div id="august-lock">
+      <p>🔒 還有 <span id="august-count"></span> 天才開放喔～<br>你想我！要打給我 ❤️</p>
+      <div class="unlock-hint">真的想看就一直點我喔！🥹</div>
+    </div>
+    <div id="august-content" class="locked-content">
+      <img class="bottom-img" src="eight_months_tea.png" alt="八月插圖">
+      <p>
 回想八月，天氣一定還是好熱好熱。
 ☀️
 你應該早就找到喜歡的早餐店了吧～
@@ -89,17 +99,23 @@
 希望你生活順順的，也還是有很多小確幸。
 如果壓力大到不行，就來聽我們兩個的碎念
 （或者學我們抱怨生活）
-    </p>
-    <div class="speaker">🎙️ 芊絨</div>
-    <audio controls><source src="normalized_august_qianrong.mp3" type="audio/mpeg"></audio>
-    <div class="speaker">🎙️ 詩芹</div>
-    <audio controls><source src="normalized_august_shiqin.mp3" type="audio/mpeg"></audio>
+      </p>
+      <div class="speaker">🎙️ 芊絨</div>
+      <audio controls><source src="normalized_august_qianrong.mp3" type="audio/mpeg"></audio>
+      <div class="speaker">🎙️ 詩芹</div>
+      <audio controls><source src="normalized_august_shiqin.mp3" type="audio/mpeg"></audio>
+    </div>
   </div>
 
-  <div id="march-card" class="card locked">
-    <img class="bottom-img" src="march_final_art.png" alt="三月插圖">
+  <div id="march-wrapper" class="card">
     <h2>🌅 三月歸期：倒數的風景</h2>
-    <p>
+    <div id="march-lock">
+      <p>🔒 還有 <span id="march-count"></span> 天才開放喔～<br>你想我！要打給我 ❤️</p>
+      <div class="unlock-hint">真的想看就一直點我喔！🥹</div>
+    </div>
+    <div id="march-content" class="locked-content">
+      <img class="bottom-img" src="march_final_art.png" alt="三月插圖">
+      <p>
 這段旅程已經快到尾聲了。
 😢
 我們在討論著你回來的第一頓飯要吃什麼（鹽酥雞+綠豆沙是必須的）
@@ -107,38 +123,44 @@
 你走的路是不是每一步都在提醒你「我真的做到了」？
 最後這個月，請你放心地看風景，好好告別那邊的生活。
 我們會張開雙手迎接你回來。
-    </p>
-    <div class="speaker">🎙️ 芊絨</div>
-    <audio controls><source src="normalized_march_qianrong.mp3" type="audio/mpeg"></audio>
-    <div class="speaker">🎙️ 詩芹</div>
-    <audio controls><source src="normalized_march_shiqin.mp3" type="audio/mpeg"></audio>
+      </p>
+      <div class="speaker">🎙️ 芊絨</div>
+      <audio controls><source src="normalized_march_qianrong.mp3" type="audio/mpeg"></audio>
+      <div class="speaker">🎙️ 詩芹</div>
+      <audio controls><source src="normalized_march_shiqin.mp3" type="audio/mpeg"></audio>
+    </div>
   </div>
 
   <script>
-    function showCountdown(id, targetDate) {
+    function setupUnlock(wrapperId, lockId, contentId, dateStr, countId) {
+      const wrapper = document.getElementById(wrapperId);
+      const lock = document.getElementById(lockId);
+      const content = document.getElementById(contentId);
+      const count = document.getElementById(countId);
       const now = new Date();
-      const date = new Date(targetDate);
-      const diff = Math.ceil((date - now) / (1000 * 60 * 60 * 24));
+      const target = new Date(dateStr);
+      const diff = Math.ceil((target - now) / (1000 * 60 * 60 * 24));
+      count.innerText = diff;
+
       if (diff <= 0) {
-        document.getElementById(id).classList.remove("locked");
+        lock.style.display = "none";
+        content.style.display = "block";
       } else {
-        const msg = document.createElement("div");
-        msg.innerHTML = `🔒 還有 ${diff} 天才開放喔～<br>點太多次會被我們發現你想我們啦！🥹❤️`;
-        msg.style.color = '#d55';
-        document.getElementById(id).appendChild(msg);
         let clicks = 0;
-        document.getElementById(id).onclick = () => {
+        wrapper.onclick = () => {
           clicks++;
           if (clicks >= 3) {
-            document.getElementById(id).classList.remove("locked");
+            lock.style.display = "none";
+            content.style.display = "block";
           } else {
             alert("你想我！要打給我 ❤️");
           }
         }
       }
     }
-    showCountdown("august-card", "2025-10-10");
-    showCountdown("march-card", "2026-03-05");
+
+    setupUnlock("august-wrapper", "august-lock", "august-content", "2025-10-10", "august-count");
+    setupUnlock("march-wrapper", "march-lock", "march-content", "2026-03-05", "march-count");
   </script>
 </body>
 </html>
