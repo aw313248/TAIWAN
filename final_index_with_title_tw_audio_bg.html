@@ -45,41 +45,22 @@
       border-radius: 16px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
-    .old-player {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://cdn.pixabay.com/animation/2022/11/17/01/30/01-30-42-804_512.gif') repeat;
-      background-size: cover;
-      z-index: -1;
-      opacity: 0.2;
-      animation: scrollBg 60s linear infinite;
-    }
-    @keyframes scrollBg {
-      from { background-position: 0 0; }
-      to { background-position: 0 1000px; }
-    }
-    .locked-card {
+    .locked-overlay {
       background-color: rgba(255, 245, 247, 0.8);
       border: 2px dashed #f9a;
       padding: 20px;
       border-radius: 20px;
-      text-align: center;
       color: #e05c7b;
       cursor: pointer;
-      position: relative;
+      margin: 30px auto;
+      max-width: 500px;
     }
-    .locked-card:hover {
-      background-color: #fff5f9;
-    }
-    .locked-card .emoji {
+    .locked-overlay .emoji {
       font-size: 2em;
       display: block;
       margin-bottom: 10px;
     }
-    .locked-card .countdown {
+    .locked-overlay .countdown {
       font-size: 0.9em;
       color: #c55;
       margin-top: 10px;
@@ -87,45 +68,54 @@
   </style>
 </head>
 <body>
-  <div class="old-player"></div>
-
-  <h1 style="background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Flag_of_Taiwan.svg/2560px-Flag_of_Taiwan.svg.png') no-repeat center center;background-size: cover;color: #ff2c91;padding: 20px;border-radius: 12px;">芊絨 & 詩芹：來自未來的我們 ✉️</h1>
-
-  <div class="audio-box">
-    <p>🎵 背景音樂：放鬆的海浪聲（若未自動播放，請點播放）</p>
-    <audio autoplay loop muted preload="auto" style="display:none">
-      <source src="https://drive.google.com/uc?export=download&id=1SAriFBbif2OlkqUas5ppzs0TgCZA9CKC" type="audio/mpeg">
-    </audio>
-  </div>
+  <h1>芊絨 & 詩芹：來自未來的我們 ✉️</h1>
 
   <div class="card">
     <img class="bottom-img" src="four_months.png" alt="四月插圖">
     <h2>🧭 四月出發：這段新旅程的開始</h2>
     <p>
 第一天到曼谷的時候，我們就想著你一定在機場✈️緊張兮兮又很期待吧～
-好想知道你是不是一邊過海關一邊想著「我真的要來這裡一年嗎？」
-（笑）🤯
-我們那時候還賭你第一天會不會直接爆買零食🛍️
-快回報啊乃昀老師！
+好想知道你是不是一邊過海關一邊想著「我真的要來這裡一年嗎？」（笑）🤯
+我們那時候還賭你第一天會不會直接爆買零食🛍️，快回報啊乃昀老師！
 
 其實你踏出那一步，我們真的超佩服的。很多人會猶豫、會怕變化，但你就是那種默默把事情做到好的人。
 我們每次聊到你，都會笑著說「那孩子現在應該忙著幫學生改作業吧～」
 也拜託你記得，如果哪天晚上忽然很想吃鹽酥雞，或只是想講幹話，我們永遠都在線上！📱
     </p>
     <div class="speaker">🎙️ 芊絨</div>
-    <audio controls preload="auto" style="width: 100%; margin-top: 5px;">
-      <source src="normalized_april_qianrong.mp3" type="audio/mpeg">
-    </audio>
+    <audio controls><source src="normalized_april_qianrong.mp3" type="audio/mpeg"></audio>
     <div class="speaker">🎙️ 詩芹</div>
-    <audio controls preload="auto" style="width: 100%; margin-top: 5px;">
-      <source src="normalized_april_shiqin.mp3" type="audio/mpeg">
-    </audio>
+    <audio controls><source src="normalized_april_shiqin.mp3" type="audio/mpeg"></audio>
   </div>
 
-  <div class="card">
-    <img class="bottom-img" src="eight_months_tea.png" alt="八月插圖">
-    <h2>🫖 八月仲夏：生活穩定了嗎？</h2>
-    <p>
+  <div id="august-card" class="locked-overlay" onclick="handleUnlock('august')">
+    <span class="emoji">🔒</span>
+    🫖 八月仲夏：生活穩定了嗎？<br>
+    ⏳ 還有 <span id="august-count"></span> 天解鎖！
+  </div>
+
+  <div id="march-card" class="locked-overlay" onclick="handleUnlock('march')">
+    <span class="emoji">🔒</span>
+    🌅 三月歸期：倒數的風景<br>
+    ⏳ 還有 <span id="march-count"></span> 天解鎖！
+  </div>
+
+  <script>
+    const unlockCounts = { august: 0, march: 0 };
+    const unlockThreshold = 3;
+
+    function handleUnlock(id) {
+      unlockCounts[id]++;
+      if (unlockCounts[id] < unlockThreshold) {
+        alert("你想我！要打給我 ❤️");
+      } else {
+        const container = document.getElementById(id + '-card');
+        const fullContent = document.createElement('div');
+        fullContent.innerHTML = id === 'august' ? `
+          <div class="card">
+            <img class="bottom-img" src="eight_months_tea.png" alt="八月插圖">
+            <h2>🫖 八月仲夏：生活穩定了嗎？</h2>
+            <p>
 回想八月，天氣一定還是好熱好熱。
 ☀️
 你應該早就找到喜歡的早餐店了吧～
@@ -136,42 +126,43 @@
 希望你生活順順的，也還是有很多小確幸。
 如果壓力大到不行，就來聽我們兩個的碎念
 （或者學我們抱怨生活）
-    </p>
-    <div class="speaker">🎙️ 芊絨</div>
-    <audio controls preload="auto" style="width: 100%; margin-top: 5px;">
-      <source src="normalized_august_qianrong.mp3" type="audio/mpeg">
-    </audio>
-    <div class="speaker">🎙️ 詩芹</div>
-    <audio controls preload="auto" style="width: 100%; margin-top: 5px;">
-      <source src="normalized_august_shiqin.mp3" type="audio/mpeg">
-    </audio>
-  </div>
-
-  <div class="card">
-    <img class="bottom-img" src="march_final_art.png" alt="三月插圖">
-    <h2>🌅 三月歸期：倒數的風景</h2>
-    <p>
+            </p>
+            <div class="speaker">🎙️ 芊絨</div>
+            <audio controls><source src="normalized_august_qianrong.mp3" type="audio/mpeg"></audio>
+            <div class="speaker">🎙️ 詩芹</div>
+            <audio controls><source src="normalized_august_shiqin.mp3" type="audio/mpeg"></audio>
+          </div>` : `
+          <div class="card">
+            <img class="bottom-img" src="march_final_art.png" alt="三月插圖">
+            <h2>🌅 三月歸期：倒數的風景</h2>
+            <p>
 這段旅程已經快到尾聲了。
 😢
-我們在討論著你回來的第一頓飯要吃什麼
-（鹽酥雞+綠豆沙是必須的）
+我們在討論著你回來的第一頓飯要吃什麼（鹽酥雞+綠豆沙是必須的）
 你那邊的天空是不是不一樣？
 你走的路是不是每一步都在提醒你「我真的做到了」？
 最後這個月，請你放心地看風景，好好告別那邊的生活。
 我們會張開雙手迎接你回來。
-    </p>
-    <div class="speaker">🎙️ 芊絨</div>
-    <audio controls preload="auto" style="width: 100%; margin-top: 5px;">
-      <source src="normalized_march_qianrong.mp3" type="audio/mpeg">
-    </audio>
-    <div class="speaker">🎙️ 詩芹</div>
-    <audio controls preload="auto" style="width: 100%; margin-top: 5px;">
-      <source src="normalized_march_shiqin.mp3" type="audio/mpeg">
-    </audio>
-  </div>
+            </p>
+            <div class="speaker">🎙️ 芊絨</div>
+            <audio controls><source src="normalized_march_qianrong.mp3" type="audio/mpeg"></audio>
+            <div class="speaker">🎙️ 詩芹</div>
+            <audio controls><source src="normalized_march_shiqin.mp3" type="audio/mpeg"></audio>
+          </div>`;
+        container.replaceWith(fullContent);
+      }
+    }
 
-  <footer style="margin-top: 60px; text-align: center; color: #999; font-size: 0.9em;">
-    本頁由 明宏Oscar 製作 ❤️
-  </footer>
+    function updateCountdown(targetId, dateStr) {
+      const now = new Date();
+      const target = new Date(dateStr);
+      const diff = Math.ceil((target - now) / (1000 * 60 * 60 * 24));
+      document.getElementById(targetId + '-count').innerText = diff;
+    }
+
+    updateCountdown('august', '2025-10-10');
+    updateCountdown('march', '2026-03-05');
+  </script>
+
 </body>
 </html>
