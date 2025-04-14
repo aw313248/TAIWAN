@@ -18,40 +18,75 @@
       background-size: cover;
       background-position: center;
       border-radius: 18px;
-      padding: 30px;
-      margin: 40px 0;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      padding: 40px;
+      margin: 60px auto;
+      max-width: 800px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 2.8em;
+      color: #d63072;
+      margin-bottom: 40px;
     }
     h2 {
-      background: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.85);
       display: inline-block;
-      padding: 8px 16px;
-      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 1.5em;
+      border-radius: 16px;
+      margin-bottom: 20px;
     }
     p {
-      background: rgba(255,255,255,0.6);
-      padding: 12px;
-      border-radius: 12px;
-      line-height: 1.8;
+      background: rgba(255,255,255,0.75);
+      padding: 16px;
+      border-radius: 16px;
+      line-height: 1.9;
+      font-size: 1.15em;
       white-space: pre-line;
+      margin-bottom: 20px;
     }
     .speaker {
       font-weight: bold;
-      margin-top: 10px;
+      margin: 12px 0 6px;
+      font-size: 1.1em;
     }
     .bottom-img {
       width: 100%;
+      max-height: 500px;
+      object-fit: cover;
       margin-top: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     }
     .locked-content {
       display: none;
     }
     .unlock-hint {
-      font-size: 0.8em;
+      font-size: 0.9em;
       color: #c55;
-      margin-top: 8px;
+      margin-top: 10px;
+    }
+    audio {
+      width: 90%;
+      margin: 10px auto 30px;
+      display: block;
+    }
+    @media screen and (max-width: 768px) {
+      .card {
+        padding: 24px;
+        margin: 30px 0;
+      }
+      h1 {
+        font-size: 2em;
+      }
+      h2 {
+        font-size: 1.2em;
+        padding: 8px 16px;
+      }
+      p {
+        font-size: 1em;
+        padding: 12px;
+      }
     }
   </style>
 </head>
@@ -65,15 +100,13 @@
   <div class="card">
     <img class="bottom-img" src="four_months.png" alt="四月插圖">
     <h2>🧭 四月出發：這段新旅程的開始</h2>
-    <p>
-第一天到曼谷的時候，我們就想著你一定在機場✈️緊張兮兮又很期待吧～
+    <p>第一天到曼谷的時候，我們就想著你一定在機場✈️緊張兮兮又很期待吧～
 好想知道你是不是一邊過海關一邊想著「我真的要來這裡一年嗎？」（笑）🤯
 我們那時候還賭你第一天會不會直接爆買零食🛍️，快回報啊乃昀老師！
 
 其實你踏出那一步，我們真的超佩服的。很多人會猶豫、會怕變化，但你就是那種默默把事情做到好的人。
 我們每次聊到你，都會笑著說「那孩子現在應該忙著幫學生改作業吧～」
-也拜託你記得，如果哪天晚上忽然很想吃鹽酥雞，或只是想講幹話，我們永遠都在線上！📱
-    </p>
+也拜託你記得，如果哪天晚上忽然很想吃鹽酥雞，或只是想講幹話，我們永遠都在線上！📱</p>
     <div class="speaker">🎙️ 芊絨</div>
     <audio controls><source src="normalized_april_qianrong.mp3" type="audio/mpeg"></audio>
     <div class="speaker">🎙️ 詩芹</div>
@@ -88,18 +121,14 @@
     </div>
     <div id="august-content" class="locked-content">
       <img class="bottom-img" src="eight_months_tea.png" alt="八月插圖">
-      <p>
-回想八月，天氣一定還是好熱好熱。
-☀️
+      <p>回想八月，天氣一定還是好熱好熱。☀️
 你應該早就找到喜歡的早餐店了吧～
 還是還在吃7-11？
 我們會一邊開玩笑說「乃昀現在應該在幫學生看報告吧」
-一邊幻想你說你要來載我們哈哈哈
-🛵
+一邊幻想你說你要來載我們哈哈哈🛵
 希望你生活順順的，也還是有很多小確幸。
 如果壓力大到不行，就來聽我們兩個的碎念
-（或者學我們抱怨生活）
-      </p>
+（或者學我們抱怨生活）</p>
       <div class="speaker">🎙️ 芊絨</div>
       <audio controls><source src="normalized_august_qianrong.mp3" type="audio/mpeg"></audio>
       <div class="speaker">🎙️ 詩芹</div>
@@ -115,15 +144,12 @@
     </div>
     <div id="march-content" class="locked-content">
       <img class="bottom-img" src="march_final_art.png" alt="三月插圖">
-      <p>
-這段旅程已經快到尾聲了。
-😢
+      <p>這段旅程已經快到尾聲了。😢
 我們在討論著你回來的第一頓飯要吃什麼（鹽酥雞+綠豆沙是必須的）
 你那邊的天空是不是不一樣？
 你走的路是不是每一步都在提醒你「我真的做到了」？
 最後這個月，請你放心地看風景，好好告別那邊的生活。
-我們會張開雙手迎接你回來。
-      </p>
+我們會張開雙手迎接你回來。</p>
       <div class="speaker">🎙️ 芊絨</div>
       <audio controls><source src="normalized_march_qianrong.mp3" type="audio/mpeg"></audio>
       <div class="speaker">🎙️ 詩芹</div>
